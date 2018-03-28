@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/stylesheet.css">
+    <title>Stem Webserver Power Management</title>
+  </head>
+  <body>
+      <h1>Stem Power Management</h1>
+      {% for dose in dosen %}
+      <p>Die {{ dosen[dose].name}}
+      {% if dosen[dose].status == true %}
+	ist momentan ausgeschaltet
+      {% else %}
+	ist momentan angeschaltet
+      {% endif %}
+      </p>
+      {% endfor %}
+      
+      {% if buttonState == False %}      
+      <a href="/on"> <button> Cluster anschalten</button></a>
+      <br></br>
+      {% else %}
+      <a href="/off"> <button>Cluster ausschalten</button></a>
+      <br></br>
+      {% endif %}
+      {% if response %}
+      {{ response }}
+      {% endif %}
+  </body>
+</html>

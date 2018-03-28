@@ -1,0 +1,29 @@
+tile
+{
+    color: black;
+    font-family: verdana;
+    fontsize: 300%;
+}
+
+head 
+{
+    background: powderblue;
+    color: blue;
+    font-family: verdana;
+    font-size: 300%;
+}
+
+body 
+{
+    background: powderblue;
+    color: black;
+    font-family: courier;
+    font-size: 200%;
+}
+
+h1 
+{
+    color: black;
+    font-family: verdana;
+    font-size: 300%;
+}
