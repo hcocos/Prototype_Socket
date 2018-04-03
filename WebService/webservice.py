@@ -51,7 +51,7 @@ def allOn():
 		GPIO.output(dose, GPIO.LOW)
 		time.sleep(1)
 
-	return "All Sockets on!\n"
+	return "All Sockets switched on!\n"
 
 
 # switches off the sockets sequentially
@@ -62,7 +62,7 @@ def allOff():
 		GPIO.output(dose, GPIO.HIGH)
 		time.sleep(1)
 
-	return "All Sockets off!\n"
+	return "All Sockets switched off!\n"
 
 if __name__ == '__main__':
     app.run(debug=True, host='192.168.178.220',port=2789)
