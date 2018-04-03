@@ -4,10 +4,10 @@
 import RPi.GPIO as GPIO
 
 
-# Setzt das Schema auf GPIO Nummern
+# Sets the GPIO Numbering to the Port Numbering 
 GPIO.setmode(GPIO.BCM)
 
-# Schaltet Warnungen auf der Kommandozeile aus
+# Disables warnings on Command Line
 GPIO.setwarnings(False)
 
 GPIO.setup(25, GPIO.OUT)

@@ -1,3 +1,4 @@
+# Starts the webapplication
 #!/usr/bin/env python
 #coding: utf8 
 

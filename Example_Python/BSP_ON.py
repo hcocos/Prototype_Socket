@@ -5,21 +5,21 @@ import RPi.GPIO as GPIO
 
 import time
 
-# Setzt das Schema auf GPIO Nummern
+# Sets the GPIO Numbering to the Port Numbering 
 GPIO.setmode(GPIO.BCM)
 
-# Schaltet Warnungen auf der Kommandozeile aus
+# Disables warnings on Command Line
 GPIO.setwarnings(False)
 
-# Definiert alle Ports als Ausgang und 
-# Setzt sie auf HIGH
+# Defines all GPIO-Ports as Output 
+# Then sets the State to HIGH
 for port in range(2, 10):
 	GPIO.setup(port, GPIO.OUT)
 	GPIO.output(port, GPIO.HIGH)
 
 print("Ports wurden gesetzt")
 
-# Schaltet die Ports an mit 5 Sekunden Unterbrechung zwischen jedem Port
+# Toggles all Ports with a delay of 500ms
 for port in range(2, 10):
 	GPIO.output(port, GPIO.LOW)
 	print ('Port ', port, ' gestartet')

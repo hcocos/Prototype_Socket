@@ -12,18 +12,18 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 
-# Global werden die Ports und dazugehoerige Werte gesetzt
+# The Sockets are defined globally in this dictionary
 dosen = {
-        2 : {'name' : 'Steckdose Nr. 1', 'status' : GPIO.HIGH},
-        3 : {'name' : 'Steckdose Nr. 2', 'status' : GPIO.HIGH},
-        4 : {'name' : 'Steckdose Nr. 3', 'status' : GPIO.HIGH},
-        5 : {'name' : 'Steckdose Nr. 4', 'status' : GPIO.HIGH},
-        6 : {'name' : 'Steckdose Nr. 5', 'status' : GPIO.HIGH},
-        7 : {'name' : 'Steckdose Nr. 6', 'status' : GPIO.HIGH},
-        8 : {'name' : 'Steckdose Nr. 7', 'status' : GPIO.HIGH},
-        9 : {'name' : 'Steckdose Nr. 8', 'status' : GPIO.HIGH}}
+        2 : {'name' : 'Socket No. 1', 'status' : GPIO.HIGH},
+        3 : {'name' : 'Socket No. 2', 'status' : GPIO.HIGH},
+        4 : {'name' : 'Socket No. 3', 'status' : GPIO.HIGH},
+        5 : {'name' : 'Socket No. 4', 'status' : GPIO.HIGH},
+        6 : {'name' : 'Socket No. 5', 'status' : GPIO.HIGH},
+        7 : {'name' : 'Socket No. 6', 'status' : GPIO.HIGH},
+        8 : {'name' : 'Socket No. 7', 'status' : GPIO.HIGH},
+        9 : {'name' : 'Socket No. 8', 'status' : GPIO.HIGH}}
 
-# In Schleife werden jetzt die Dosen gesetzt
+# This Loop defines the Sockets as Output and sets them to HIGH (Off)
 for dose in dosen:
         GPIO.setup(dose, GPIO.OUT)
         GPIO.output(dose, GPIO.HIGH)
@@ -32,18 +32,18 @@ for dose in dosen:
 app = Flask(__name__)
 
 
-# gibt den Status aller Steckdosen als JSON Objekt zurueck
+# Returns the status of the Sockets as a JSON Object
 @app.route('/webservice/stem/status', methods=['GET'])
 def status():
 
-	# liest den Status aller Ports aus      
+	# reads the status of the sockets     
 	for dose in dosen:
 		dosen[dose]['status'] = GPIO.input(dose)
 
 	return jsonify({'Dose':dosen})
 
 
-# schaltet alle Steckdosen der Reihe nach an
+# switches on the sockets sequentially
 @app.route('/webservice/stem/on/all', methods=['GET'])
 def allOn():
 
@@ -51,10 +51,10 @@ def allOn():
 		GPIO.output(dose, GPIO.LOW)
 		time.sleep(1)
 
-	return "Alle Steckdosen angeschaltet!\n"
+	return "All Sockets on!\n"
 
 
-# schaltet alle Steckdosen der Reihe nach aus
+# switches off the sockets sequentially
 @app.route('/webservice/stem/off/all', methods=['GET'])
 def allOff():
 
@@ -62,7 +62,7 @@ def allOff():
 		GPIO.output(dose, GPIO.HIGH)
 		time.sleep(1)
 
-	return "Alle Steckdosen ausgeschaltet!\n"
+	return "All Sockets off!\n"
 
 if __name__ == '__main__':
     app.run(debug=True, host='192.168.178.220',port=2789)

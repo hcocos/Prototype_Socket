@@ -5,24 +5,24 @@ import RPi.GPIO as GPIO
 import time
 
 
-# Zählweise der Pins festlegen
+# Sets the Numbering of the GPIO-Ports
 GPIO.setmode(GPIO.BCM)
 
-#Schaltet Warnungen auf der Kommandozeile aus
+# Disables warnings on Command Line
 GPIO.setwarnings(False)
 
-# Definiert alle Ports als Ausgang und 
-# Setzt sie auf HIGH
+# Defines all Ports as Output
+# Then sets them to HIGH
 for port in range(2, 11):
 	GPIO.setup(port, GPIO.OUT)
 	GPIO.output(port, GPIO.HIGH)
 
 
-# Port 26 wird als Input mit Pull Down Widerstand gesetzt
+# Port 26 defined as Input and Pull-Down defined 
 GPIO.setup(26, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
  
 
-# Interrupt Routine zum Schalten der Relais
+# Interrupt Routine to switch on Relays
 def isr26(channel):
 	
 	button_Push_Flag = 0
@@ -49,13 +49,13 @@ def isr26(channel):
 			#print ('Port ', port, ' gestartet')
 			time.sleep(1)
 	
-	# Der Interrupt wird geloescht und naschließend wieder angemeldet
-	# Muss gemacht werden weil der Interrupt sonst doppelt ausgefuehrt wird
+	# The Interrupt has to be removed and afterwards needs to be reenabled
+	# This is done to prevent the Interrupt of double execution
 	GPIO.remove_event_detect(26)
 	GPIO.add_event_detect(26, GPIO.RISING, callback=isr26, bouncetime=500)
 
 
-# Definiert den Interrupt
+# Adds the Interrupt
 GPIO.add_event_detect(26, GPIO.RISING, callback=isr26, bouncetime=500)
 
 
